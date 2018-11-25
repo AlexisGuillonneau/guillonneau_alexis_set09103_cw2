@@ -1,0 +1,31 @@
+{% extends "base.html" %}
+
+{% block nav%}
+    <li class="nav-item">
+        <a class="nav-link" href="{{url_for('movie.index')}}">Home</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="{{url_for('movie.display_all_movies')}}">Movies</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="{{url_for('movie.about')}}">About</a>
+    </li>
+    {%if session['logged']%}
+    <li class="nav-item">
+        <a class="nav-link" href="{{url_for('movie.account')}}">Your account</a>
+    </li>
+    {%else%}
+    <li class="nav-item">
+        <a class="nav-link" href="{{url_for('movie.login')}}">Login</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="{{url_for('movie.sign')}}">Sign</a>
+    </li>
+    {%endif%}
+{%endblock%}
+{%block main%}
+    	<div class="container">	
+    		<h5 class="my-4">{{error}}
+			</h5>
+    	</div>
+ {%endblock%}

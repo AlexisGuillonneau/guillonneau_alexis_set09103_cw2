@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block nav%}
+    <li class="nav-item">
+        <a class="nav-link" href="{{url_for('movie.index')}}">Home</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="{{url_for('movie.display_all_movies')}}">Movies</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link active" href="#">About</a>
+    </li>
+    {%if session['logged']%}
+    <li class="nav-item">
+        <a class="nav-link" href="{{url_for('movie.account')}}">Your account</a>
+    </li>
+    {%else%}
+    <li class="nav-item">
+        <a class="nav-link" href="{{url_for('movie.login')}}">Login</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="{{url_for('movie.sign')}}">Sign</a>
+    </li>
+    {%endif%}
+{%endblock%}
+{%block main%}
+    	<div class="container">	
+    		<h5 class="my-4">This application was created as part of the Advanced Web Technologies module directed by Simon Wells for coursework 2.
+            As part of the latter, a report has been requested, it can be downloaded via the button below.
+			</h5>
+            <form action="/report" method="POST">
+                <input type="submit" value="Download the report" class="btn btn-primary" name="submit">
+            </form>
+    	</div>
+ {%endblock%}

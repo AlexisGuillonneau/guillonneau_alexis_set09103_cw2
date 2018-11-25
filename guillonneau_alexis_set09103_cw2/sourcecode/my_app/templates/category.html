@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+{%block head%}
+{{super()}}
+        <link href="{{ url_for('static',filename='css/category.css') }}" rel="stylesheet">
+{%endblock%} 
+{%block nav%}
+		            <li class="nav-item">
+		                <a class="nav-link" href="{{url_for('movie.index')}}">Home</a>
+		            </li>
+		            <li class="nav-item">
+		                <a class="nav-link" href="{{url_for('movie.display_all_movies')}}">Movies</a>
+		            </li>
+		            <li class="nav-item">
+		                <a class="nav-link" href="{{url_for('movie.about')}}">About</a>
+		            </li>
+		            {%if session['logged']%}
+				    <li class="nav-item">
+				        <a class="nav-link" href="{{url_for('movie.account')}}">Your account</a>
+				    </li>
+				    {%else%}
+				    <li class="nav-item">
+				        <a class="nav-link" href="{{url_for('movie.login')}}">Login</a>
+				    </li>
+				    <li class="nav-item">
+				        <a class="nav-link" href="{{url_for('movie.sign')}}">Sign</a>
+				    </li>
+				    {%endif%}
+{%endblock%}
+{%block main%}
+    	<div class="container">	
+    		<h1 class="my-4">{{category}}
+			</h1>
+    		<div class="row">
+    		{%for m in movies%}
+    		
+    		<div class="col-lg-4 col-md-4 col-sm-6 portfolio-item">
+	          <div class="card h-100">
+	            <a href="{{url_for('movie.movie',movie=m[1])}}"><img class="card-img-top" src="https://image.tmdb.org/t/p/original/{{m[11]}}" alt="" style="max-width:auto;max-height: 400px;"></a>
+	            <div class="card-body">
+	              <h4 class="card-title">
+	                <a href="{{url_for('movie.movie',movie=m[1])}}">{{m[1]}}</a>
+	              </h4>
+	              <p class="card-text">{{m[9]}}</p>
+	            </div>
+	          </div>
+	        </div>
+	        {%endfor%}
+	</div>
+</div>
+
+    	</div>
+{%endblock%}

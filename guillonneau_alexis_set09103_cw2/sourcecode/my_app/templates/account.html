@@ -1,0 +1,50 @@
+{% extends 'base.html' %}
+{%block head%}
+	{{super()}}
+	<script src="{{ url_for('static', filename='js/all_movies.js')}}"></script>
+       <link href="{{ url_for('static',filename='css/category.css') }}" rel="stylesheet">
+{%endblock%}
+
+{% block nav%}
+	<li class="nav-item">
+        <a class="nav-link" href="{{url_for('movie.index')}}">Home</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="{{url_for('movie.display_all_movies')}}">Movies</a>
+    </li>
+    <li class="nav-item">
+        <a class="nav-link" href="{{url_for('movie.about')}}">About</a>
+    </li>
+
+    <li class="nav-item">
+        <a class="nav-link active" href="{{url_for('movie.account')}}">Your account</a>
+    </li>
+    
+{%endblock%}
+
+{%block main%}
+<div class="container">
+	<div class="row">
+		<h1>{{username}}</h1>
+	</div>
+	<div class="row">
+		<h5>Your watch list:</h5>
+	</div>
+	<div class="row">
+		{%for movie in movies%}
+		<div class="col-lg-4 col-md-4 col-sm-6 portfolio-item" id="watchlist">
+	          <div class="card h-100">
+	            <a href="{{url_for('movie.movie',movie=movie[1])}}"><img class="card-img-top" src="" alt="Loading Image" data-image="{{movie[11]}}" style="max-width:auto;max-height: 500px;"></a>
+	            <div class="card-body">
+	              <h4 class="card-title">
+	                <a href="{{url_for('movie.movie',movie=movie[1])}}">{{movie[1]}}</a>
+	              </h4>
+	              <p class="card-text">{{movie[9]}}</p>
+	            </div>
+	          </div>
+	    </div>
+	   	{%endfor%}
+	</div>
+</div>
+
+{%endblock%}

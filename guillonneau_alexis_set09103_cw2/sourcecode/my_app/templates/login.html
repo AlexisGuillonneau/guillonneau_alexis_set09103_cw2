@@ -1,0 +1,52 @@
+{%extends "base.html" %}
+{%block head%}
+{{super()}}
+	<link href="{{ url_for('static',filename='css/category.css') }}" rel="stylesheet">
+{%endblock%}
+{%block nav%}
+		            <li class="nav-item">
+		                <a class="nav-link" href="{{url_for('movie.index')}}">Home</a>
+		            </li>
+		            <li class="nav-item">
+		                <a class="nav-link" href="{{url_for('movie.display_all_movies')}}">Movies</a>
+		            </li>
+		            <li class="nav-item">
+		                <a class="nav-link" href="{{url_for('movie.about')}}">About</a>
+		            </li>
+		            <li class="nav-item active">
+		            	<a class="nav-link" href="{{url_for('movie.login')}}">Login</a>
+		            </li>
+		            <li class="nav-item">
+    					<a class="nav-link" href="{{url_for('movie.sign')}}">Sign</a>
+    				</li>
+{%endblock%} 
+{%block main%}
+	<div class="container">
+		{%if get_flashed_messages is not none%}
+			{% with messages = get_flashed_messages() %}
+			<div class="row">
+				{%for message in messages%}
+				<div class="alert alert-danger" role="alert">
+				  {{message|safe}}
+				</div>
+				{%endfor%}
+			</div>
+			{%endwith%}
+		{%endif%}
+		<form name="login_form" action="{{url_for('movie.root')}}"" method="post">
+		  <div class="form-group">
+		    <label for="exampleInputEmail1">Email address</label>
+		    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email" name="email">
+		    <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else.</small>
+		  </div>
+		  <div class="form-group">
+		    <label for="exampleInputPassword1">Password</label>
+		    <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password" name="password">
+		  </div>
+		  <div class="form-group form-check">
+		    <input type="checkbox" class="form-check-input" id="exampleCheck1">
+		    <label class="form-check-label" for="exampleCheck1">Check me out</label>
+		  </div>
+		  <button type="submit" class="btn btn-primary">Login</button>
+		</form>
+{%endblock%}

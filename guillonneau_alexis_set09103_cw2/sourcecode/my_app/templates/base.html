@@ -1,0 +1,68 @@
+<!DOCTYPE HTML>
+<html lang="en">
+  <head>
+  	{%block head%}
+    <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+        <meta http-equiv="Pragma" content="no-cache">
+        <meta http-equiv="Expires" content="-1">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>MoviesSearch</title>
+        <script src="{{ url_for('static', filename='js/jquery-3.3.1.min.js' ) }}"></script>
+        <script src="{{ url_for('static', filename='js/bootstrap.min.js') }}"></script>
+        <script src="{{ url_for('static', filename='js/sideNav.js')}}"></script>
+        <link href="{{ url_for('static',filename='css/bootstrap.min.css') }}" rel="stylesheet">
+        <link href="{{ url_for('static',filename='css/index.css') }}" rel="stylesheet">
+    {%endblock%}
+    </head>
+    <body>
+
+    	<nav class="navbar navbar-expand-md navbar-dark bg-dark">
+		    <div class="mx-auto order-0">
+		        <a class="navbar-brand mx-auto" href="{{url_for('movie.index')}}">MoviesSearch</a>
+		        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".dual-collapse2">
+		            <span class="navbar-toggler-icon"></span>
+		        </button>
+		    </div>
+		    <div class="navbar-collapse collapse w-100 order-3 dual-collapse2">
+		        <ul class="navbar-nav ml-auto">
+		        	{%if session['logged']%}
+			        	<li class="nav-item">
+			  				<a class="nav-link disabled" id='log' aria-disabled="true" href="">Logged as {{session['logged']}}</a>	
+			        	</li>
+		        	{%endif%}
+		            {%block nav%}
+		            {%endblock%}
+		            {%if session['logged']%}
+		            	<li class='nav-item'>
+		            		<a class="nav-link" href="{{url_for('movie.logout')}}">Logout</a>
+		            	</li>
+		            {%endif%}
+
+		        </ul>
+		    </div>
+		</nav>
+
+		<nav class="navbar fixed-bottom navbar-expand-md navbar-dark bg-dark">
+		  Copyright © Alexis Guillonneau - Website created for the coursework 2 in Advanced Web Technologies module at Napier University (Edinburgh)
+		</nav>
+
+
+		<div id="mySidenav" class="sidenav">
+		  <a href="javascript:void(0)" class="closebtn" onclick="closeNav()">&times;</a>
+		  {%for c in categories%}
+		  <a href="{{url_for('movie.category',category=c)}}">{{c}}</a>
+		  {%endfor%}
+		</div>
+
+		<div id="main">
+		  <span style="font-size:30px;cursor:pointer" onclick="openNav()">&#9776; Categories</span>
+		</div>
+
+		
+			{%block main%}
+			{%endblock%}
+		
+    </body>
+    </html>
